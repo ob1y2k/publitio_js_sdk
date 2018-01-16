@@ -1,0 +1,35 @@
+{
+  "name": "publitio_javascript_sdk",
+  "version": "1.0.0",
+  "description": "Simple JavaScript SDK for Publitio API",
+  "main": "build/publitio-api.js",
+  "scripts": {
+    "dev": "watch 'npm run build' src",
+    "build": "babel src -d build",
+    "prepublish": "npm run build",
+    "release": "np"
+  },
+  "babel": {
+    "presets": [
+      "latest"
+    ]
+  },
+  "keywords": [
+    "publitio",
+    "api",
+    "javascript"
+  ],
+  "author": "",
+  "license": "",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-latest": "^6.24.1",
+    "np": "^2.18.3",
+    "watch": "^1.0.2"
+  },
+  "dependencies": {
+    "crypto-js": "^3.1.9-1",
+    "promise-polyfill": "7.0.0",
+    "whatwg-fetch": "^2.0.3"
+  }
+}
