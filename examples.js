@@ -4,6 +4,7 @@ import { publitioApi } from 'publitio_javascript_sdk'
 // Please update xxxx with your key and yyyy with your secret
 let publitio = publitioApi("xxxx","yyyy");
 
+// file ---> Some JS file
 
 /*_________________________*/
 /* File Class             */
@@ -156,12 +157,12 @@ publitio.call('/files/list', 'GET', { offset: '0', limit: '10' })
 //   .catch((error) => { console.log(error) })
 
 // // update file version with id 69D3lwtm
-// publitio.call('files/versions/update/69D3lwtm', 'PUT', {})
+// publitio.call('/files/versions/update/69D3lwtm', 'PUT', {})
 //   .then((data) => { printResponse(data) })
 //   .catch((error) => { console.log(error) })
 
 // // delete file version with id 69D3lwtm
-// publitio.call('files/versions/delete/69D3lwtm', 'DELETE')
+// publitio.call('/files/versions/delete/69D3lwtm', 'DELETE')
 //   .then((data) => { printResponse(data) })
 //   .catch((error) => { console.log(error) })
 
@@ -176,7 +177,7 @@ publitio.call('/files/list', 'GET', { offset: '0', limit: '10' })
 //   .catch((error) => { console.log(error) })
 
 // // create (upload) watermark from local file
-// pubitio.uploadFile('samples/smile.png', 'watermark', {
+// pubitio.uploadFile(file, 'watermark', {
 //   name: 'mytestwm',
 //   position: 'bottom-right',
 //   padding: '20'
@@ -186,7 +187,7 @@ publitio.call('/files/list', 'GET', { offset: '0', limit: '10' })
 // // show watermark with id mytestwm
 // publitio.call('/watermarks/show/mytestwm', 'GET')
 //   .then((data) => { printResponse(data) })
-//   .catch((error) => { console.log(error) }) 
+//   .catch((error) => { console.log(error) })
 
 // // update watermark with id mytestwm
 // publitio.call('/watermarks/update/mytestwm', 'PUT', {
@@ -203,13 +204,12 @@ publitio.call('/files/list', 'GET', { offset: '0', limit: '10' })
 
 // /*_________________________*/
 
-function printResponse (response) {
+function printResponse(response) {
   if (!response.success) {
-    let errorCode = response.code
-    let errorMessage = response.message
-    console.log(`${errorMessage}:${errorCode}`)
+    let errorMessage = response.error.message
+    console.log(`${errorMessage}`)
   } else {
-    console.log('All good..do your stuff here (get id, html, etc. from response)')
+    console.log('All good... Do your stuff here (get id, html, etc. from the response)')
     console.log(response)
   }
 }

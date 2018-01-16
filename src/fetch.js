@@ -1,10 +1,10 @@
 import Promise from 'promise-polyfill'
 import 'whatwg-fetch'
+import { ERROR_CODES } from './constants'
 
 class FetchService {
   checkResponseStatus (response) {
-    console.log('hERE')
-    if (response.status >= 200 && response.status < 300) {
+    if ((response.status >= 200 && response.status < 300) || ERROR_CODES.includes(response.status))  {
       return response
     } else {
       let error = new Error(response.statusText)
