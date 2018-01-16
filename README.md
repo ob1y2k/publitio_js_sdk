@@ -58,7 +58,7 @@ Sample api call to list files:
 ```javascript
 
 // list files
-api.call("/files/list", "GET", { offset: '0', limit: '10'})
+api.call('/files/list', 'GET', { offset: '0', limit: '10'})
 	.then((response) => { console.log(response) })
 	.catch((error) => { console.log(error) })
 
