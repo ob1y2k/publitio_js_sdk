@@ -1,5 +1,5 @@
 {
-  "name": "publitio_javascript_sdk",
+  "name": "publitio_js_sdk",
   "version": "1.0.0",
   "description": "Simple JavaScript SDK for Publitio API",
   "main": "build/publitio-api.js",
@@ -17,7 +17,8 @@
   "keywords": [
     "publitio",
     "api",
-    "javascript"
+    "javascript",
+    "js"
   ],
   "author": "",
   "license": "",

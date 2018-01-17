@@ -1,6 +1,6 @@
 export const API = {
   VERSION: '1.0',
-  URL: 'http://api.publit.io/v1'
+  URL: 'https://api.publit.io/v1'
 }
 
 export const ACTIONS = {
