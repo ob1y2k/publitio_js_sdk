@@ -1,5 +1,5 @@
 
-# Publitio JavaScript SDK
+# Publitio JS SDK
 
 ---
 ### Description
@@ -34,6 +34,7 @@ $ yarn add publitio_js_sdk
 ```javascript
 
 const { publitioApi } = require('publitio_js_sdk')
+window.publitioApi = publitioApi
 
 ```
 
@@ -42,6 +43,7 @@ const { publitioApi } = require('publitio_js_sdk')
 ```javascript
 
 import { publitioApi } from 'publitio_js_sdk'
+window.publitioApi = publitioApi
 
 ```
 
@@ -49,7 +51,7 @@ import { publitioApi } from 'publitio_js_sdk'
 
 // xxxx => Your API_KEY
 // yyyy => Your API_SECRET
-window.publitio = publitioApi('xxxx', 'yyyy')
+let publitio  = publitioApi('xxxx', 'yyyy')
 
 ```
 
