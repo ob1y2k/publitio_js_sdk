@@ -14,7 +14,7 @@ Simple JavaScript SDK for **Publitio API**.
 
 ```shell
 
-$ npm install publitio_javascript_sdk --save
+$ npm install publitio_js_sdk --save
 
 ```
 
@@ -22,7 +22,7 @@ $ npm install publitio_javascript_sdk --save
 
 ```shell
 
-$ yarn add publitio_javascript_sdk
+$ yarn add publitio_js_sdk
 
 ```
 
@@ -33,7 +33,7 @@ $ yarn add publitio_javascript_sdk
 
 ```javascript
 
-const { publitioApi } = require('publitio_javascript_sdk')
+const { publitioApi } = require('publitio_js_sdk')
 
 ```
 
@@ -41,7 +41,7 @@ const { publitioApi } = require('publitio_javascript_sdk')
 
 ```javascript
 
-import { publitioApi } from 'publitio_javascript_sdk'
+import { publitioApi } from 'publitio_js_sdk'
 
 ```
 
