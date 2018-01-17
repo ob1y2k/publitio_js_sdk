@@ -1,5 +1,5 @@
-import { publitioApi } from 'publitio_javascript_sdk'
-// const { publitioApi } = require('publitio_javascript_sdk')
+import { publitioApi } from 'publitio_js_sdk'
+// const { publitioApi } = require('publitio_js_sdk')
 
 // Please update xxxx with your key and yyyy with your secret
 let publitio = publitioApi("xxxx","yyyy");

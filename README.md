@@ -14,7 +14,7 @@ Simple JavaScript SDK for **Publitio API**.
 
 ```shell
 
-$ npm install publitio_javascript_sdk --save
+$ npm install publitio_js_sdk --save
 
 ```
 
@@ -22,7 +22,7 @@ $ npm install publitio_javascript_sdk --save
 
 ```shell
 
-$ yarn add publitio_javascript_sdk
+$ yarn add publitio_js_sdk
 
 ```
 
@@ -33,7 +33,7 @@ $ yarn add publitio_javascript_sdk
 
 ```javascript
 
-const { publitioApi } = require('publitio_javascript_sdk')
+const { publitioApi } = require('publitio_js_sdk')
 
 ```
 
@@ -41,7 +41,7 @@ const { publitioApi } = require('publitio_javascript_sdk')
 
 ```javascript
 
-import { publitioApi } from 'publitio_javascript_sdk'
+import { publitioApi } from 'publitio_js_sdk'
 
 ```
 
@@ -49,7 +49,7 @@ import { publitioApi } from 'publitio_javascript_sdk'
 
 // xxxx => Your API_KEY
 // yyyy => Your API_SECRET
-let api = publitioApi('xxxx', 'yyyy')
+window.publitio = publitioApi('xxxx', 'yyyy')
 
 ```
 
@@ -58,7 +58,7 @@ Sample api call to list files:
 ```javascript
 
 // list files
-api.call('/files/list', 'GET', { offset: '0', limit: '10'})
+publitio.call('/files/list', 'GET', { offset: '0', limit: '10'})
 	.then((response) => { console.log(response) })
 	.catch((error) => { console.log(error) })
 
