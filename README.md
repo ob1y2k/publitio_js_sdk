@@ -51,7 +51,7 @@ window.publitioApi = publitioApi
 
 // xxxx => Your API_KEY
 // yyyy => Your API_SECRET
-let publitio  = publitioApi('xxxx', 'yyyy')
+publitio  = publitioApi('xxxx', 'yyyy')
 
 ```
 
