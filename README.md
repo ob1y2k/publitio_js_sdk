@@ -51,7 +51,7 @@ window.publitioApi = publitioApi
 
 // xxxx => Your API_KEY
 // yyyy => Your API_SECRET
-publitio  = publitioApi('xxxx', 'yyyy')
+window.publitio  = publitioApi('xxxx', 'yyyy')
 
 ```
 

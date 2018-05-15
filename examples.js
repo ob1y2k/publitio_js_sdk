@@ -23,7 +23,7 @@ publitio.call('/files/list', 'GET', { offset: '0', limit: '10' })
 
 // //create (upload) remote file
 // publitio.uploadRemoteFile('file', {
-//   file_url: 'https://i.ytimg.com/vi/OG0P8TapSN8/hqdefault.jpg'
+//   file_url: 'https://publit.io/images/publitio_logo_white_pure_s.png'
 // }).then((data) => { printResponse(data) })
 //   .catch((error) => { console.log(error) }) 
 
