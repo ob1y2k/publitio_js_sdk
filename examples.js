@@ -38,6 +38,9 @@ publitio.call('/files/list', 'GET', { offset: '0', limit: '10' })
 // }).then((data) => { printResponse(data) })
 //   .catch((error) => { console.log(error) })
 
+// // return signed url for upload (useful for custom multiupload with progress)
+//var uploadUrl = publitio.uploadUrlSigned();
+
 // // show file with id 0M08pwHk
 // publitio.call('/files/show/0M08pwHk', 'GET')
 //   .then((data) => { printResponse(data) })

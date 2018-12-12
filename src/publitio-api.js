@@ -31,6 +31,12 @@ class PublitioAPI {
     return helper.callApi(url, 'POST')
       .catch((error) => { throw error })
   }
+
+  uploadUrlSigned (action = 'file', args = []) {
+    let url = helper.getUrlForFileCreation(action, args, this.url, this.key, this.secret, this.version)
+    return url
+  }
+
 }
 
 export function publitioApi (key, secret) {
