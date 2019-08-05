@@ -4,10 +4,10 @@
   "description": "Simple JavaScript SDK for Publitio API",
   "main": "build/publitio-api.js",
   "scripts": {
-    "dev": "watch 'npm run build' src",
-    "build": "babel src -d build",
+    "build": "babel src -d build && webpack",
     "prepublish": "npm run build",
-    "release": "np"
+    "release": "np",
+    "watch": "watch 'npm run build' src"
   },
   "babel": {
     "presets": [
@@ -26,8 +26,11 @@
     "@babel/cli": "^7.5.5",
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
     "np": "^2.18.3",
-    "watch": "^1.0.2"
+    "watch": "^1.0.2",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
   },
   "dependencies": {
     "axios": "^0.19.0",
