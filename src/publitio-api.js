@@ -1,4 +1,3 @@
-import Promise from 'promise-polyfill'
 import { helper } from './helper'
 import { API } from './constants'
 

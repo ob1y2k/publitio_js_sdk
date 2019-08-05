@@ -1,4 +1,3 @@
-import Promise from 'promise-polyfill'
 import SHA1 from 'crypto-js/sha1'
 import { ACTIONS, MIN, MAX } from './constants'
 import { fetchService } from './fetch'
@@ -15,7 +14,15 @@ export default class Helper {
   }
 
   mtRand (min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min
+    var crypto
+    let r
+    if (typeof crypto !== "undefined") {
+      r = crypto.getRandomValues(new Uint32Array(1))[0] / Math.pow(2, 32)
+    } else {
+      r = Math.random()
+    }
+
+    return Math.floor(r * (max - min + 1)) + min
   }
 
   pad (number, str) {

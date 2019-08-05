@@ -1,10 +1,7 @@
 import { publitioApi } from 'publitio_js_sdk'
-// const { publitioApi } = require('publitio_js_sdk')
-window.publitioApi = publitioApi
 
 // file ---> Some JS file
 
-// Please update xxxx with your key and yyyy with your secret
 window.publitio = publitioApi("xxxx","yyyy");
 
 /*_________________________*/

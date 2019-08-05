@@ -1,34 +1,33 @@
-import Promise from 'promise-polyfill'
-import 'whatwg-fetch'
-import { ERROR_CODES } from './constants'
+import axios from 'axios'
+import { KNOWN_ERROR_CODES } from './constants'
 
 class FetchService {
   checkResponseStatus (response) {
-    if ((response.status >= 200 && response.status < 300) || ERROR_CODES.includes(response.status))  {
+    if ((response.status >= 200 && response.status < 300) || KNOWN_ERROR_CODES.includes(response.status))
       return response
-    } else {
-      let error = new Error(response.statusText)
-      error.response = response
-      throw error
-    }
-  }
 
-  parseJSON (data) {
-    return data.json()
+    let error = new Error(response.statusText)
+    error.response = response
+    throw error
   }
 
   callApi (url, method) {
-    return fetch(url, { method })
-      .then(this.checkResponseStatus)
-      .then(this.parseJSON)
-      .catch((error) => { throw error })
+    return axios({
+      method,
+      url,
+    })
+    .then(res => this.checkResponseStatus(res))
+    .then(res => res.data)
   }
 
   uploadFile (data, url) {
-    return fetch(url, { method: 'POST', body: data })
-      .then(this.checkResponseStatus)
-      .then(this.parseJSON)
-      .catch((error) => { throw error })
+    return axios({
+      url,
+      data,
+      method: 'POST',
+    })
+    .then(res => this.checkResponseStatus(res))
+    .then(res => res.data)
   }
 }
 

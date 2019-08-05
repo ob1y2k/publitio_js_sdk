@@ -8,7 +8,7 @@ export const ACTIONS = {
   WATERMARK: 'watermark'
 }
 
-export const ERROR_CODES = [
+export const KNOWN_ERROR_CODES = [
   400, 401, 402, 403, 404, 405, 406, 410, 429, 500, 503
 ]
 
