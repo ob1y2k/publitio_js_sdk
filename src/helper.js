@@ -2,6 +2,8 @@ import SHA1 from 'crypto-js/sha1'
 import { ACTIONS, MIN, MAX } from './constants'
 import { fetchService } from './fetch'
 
+const uint32Max = Math.pow(2, 32)
+
 export default class Helper {
   serialize (obj) {
     let str = []
@@ -14,12 +16,21 @@ export default class Helper {
   }
 
   mtRand (min, max) {
-    var crypto
+    const runningInNode = (typeof window === 'undefined')
+    const hasCrypto = (typeof crypto !== 'undefined')
+
     let r
-    if (typeof crypto !== "undefined") {
-      r = crypto.getRandomValues(new Uint32Array(1))[0] / Math.pow(2, 32)
+
+    if (runningInNode) {
+      const crypto = require('crypto')
+      r = crypto.randomBytes(8).readUInt32BE() / uint32Max
+      console.log('Node')
+    } else if (hasCrypto) {
+      r = crypto.getRandomValues(new Uint32Array(1))[0] / uint32Max
+      console.log('Browser with crypto')
     } else {
       r = Math.random()
+      console.log('Browser without crypto')
     }
 
     return Math.floor(r * (max - min + 1)) + min
