@@ -9,11 +9,6 @@
     "release": "np",
     "watch": "watch 'npm run build' src"
   },
-  "babel": {
-    "presets": [
-      "@babel/preset-env"
-    ]
-  },
   "keywords": [
     "publitio",
     "api",
@@ -27,6 +22,7 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "babel-loader": "^8.0.6",
+    "eslint": "^6.1.0",
     "np": "^2.18.3",
     "watch": "^1.0.2",
     "webpack": "^4.39.1",

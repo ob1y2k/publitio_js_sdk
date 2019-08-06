@@ -1,7 +1,7 @@
 import { helper } from './helper'
 import { API } from './constants'
 
-class PublitioAPI {
+export default class PublitioAPI {
   constructor (key, secret) {
     this.version = API.VERSION
     this.url = API.URL
