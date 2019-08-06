@@ -11,6 +11,7 @@ module.exports = {
   },
   plugins: [
     new webpack.IgnorePlugin(/crypto$/),
+    new webpack.IgnorePlugin(/form-data$/),
   ],
   mode: 'production',
   module: {

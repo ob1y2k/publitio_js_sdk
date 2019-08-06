@@ -4,11 +4,17 @@ import { fetchService } from './fetch'
 
 const uint32Max = Math.pow(2, 32)
 
+export const runningInNode = (typeof window === 'undefined')
+
+if (runningInNode) {
+  var FormData = require('form-data')
+}
+
 export default class Helper {
   serialize (obj) {
-    let str = []
-    for (let property in obj) {
-      if (obj.hasOwnProperty(property)) {
+    const str = []
+    for (const property in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, property)) {
         str.push(`${encodeURIComponent(property)}=${encodeURIComponent(obj[property])}`)
       }
     }
@@ -16,21 +22,16 @@ export default class Helper {
   }
 
   mtRand (min, max) {
-    const runningInNode = (typeof window === 'undefined')
     const hasCrypto = (typeof crypto !== 'undefined')
-
     let r
 
     if (runningInNode) {
       const crypto = require('crypto')
       r = crypto.randomBytes(8).readUInt32BE() / uint32Max
-      console.log('Node')
     } else if (hasCrypto) {
       r = crypto.getRandomValues(new Uint32Array(1))[0] / uint32Max
-      console.log('Browser with crypto')
     } else {
       r = Math.random()
-      console.log('Browser without crypto')
     }
 
     return Math.floor(r * (max - min + 1)) + min
@@ -51,10 +52,6 @@ export default class Helper {
     return this.pad(8, this.mtRand(MIN, MAX))
   }
 
-  sha1 (sbs, secret) {
-    return SHA1(`${sbs}${secret}`)
-  }
-
   createUrl (call, args = [], url, key, secret, version) {
     args = this.appendArguments(args, key, secret, version)
     return `${url}${call}?${this.serialize(args)}`
@@ -65,7 +62,7 @@ export default class Helper {
       .catch((error) => { throw error })
   }
 
-  appendArguments (args, key, secret, version) {
+  appendArguments (args, key, secret) {
     args.api_nonce = this.apiNonce()
     args.api_timestamp = this.timestamp()
     args.api_key = key
@@ -75,9 +72,7 @@ export default class Helper {
   }
 
   sign (args, secret) {
-    let { api_timestamp, api_nonce } = args
-    let sbs = `${api_timestamp}${api_nonce}`
-    return this.sha1(sbs, secret)
+    return SHA1(`${args.api_timestamp}${args.api_nonce}${secret}`)
   }
 
   getUrlForFileCreation (action, args, url, key, secret, version) {
@@ -89,11 +84,11 @@ export default class Helper {
     return url
   }
 
+  // XXX file can be a Node Buffer, or a file loaded in the browser
   uploadFile (file, url) {
     const data = new FormData()
-    data.append('file', file)
+    data.append('file', file, 'file')
     return fetchService.uploadFile(data, url)
-      .catch((error) => { throw error })
   }
 }
 
