@@ -84,7 +84,7 @@ export default class Helper {
     return url
   }
 
-  // XXX file can be a Node Buffer, or a file loaded in the browser
+  // XXX file can be a Node Buffer, or a file loaded in the browser.
   uploadFile (file, url) {
     const data = new FormData()
     data.append('file', file, 'file')

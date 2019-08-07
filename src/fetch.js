@@ -4,7 +4,9 @@ import { runningInNode } from './helper';
 
 class FetchService {
   checkResponseStatus (response) {
-    if ((response.status >= 200 && response.status < 300) || KNOWN_ERROR_CODES.includes(response.status)) { return response }
+    if ((response.status >= 200 && response.status < 300) || KNOWN_ERROR_CODES.includes(response.status)) {
+      return response
+    }
 
     const error = new Error(response.statusText)
     error.response = response
@@ -23,19 +25,15 @@ class FetchService {
   uploadFile (formData, url) {
     let req
 
-    // Use form.submit and XMLHttpRequest here instead of axios
+    const validateStatus = () => true
+
     if (runningInNode) {
-      return axios.post(url, formData.getBuffer(), {
-        method: 'POST',
+      req = axios.post(url, formData.getBuffer(), {
+        validateStatus,
         headers: formData.getHeaders(),
-        validateStatus: () => true,
-      }).then(r => r.data)
-    } else {
-      req = axios({
-        url,
-        data: formData, // I don't think this would work
-        method: 'POST',
       })
+    } else {
+      req = axios.post(url, formData, {validateStatus})
     }
 
     return req
