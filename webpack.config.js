@@ -8,6 +8,7 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     library: 'PublitioAPI',
     libraryExport: 'default',
+    libraryTarget: 'umd',
   },
   plugins: [
     new webpack.IgnorePlugin(/crypto$/),

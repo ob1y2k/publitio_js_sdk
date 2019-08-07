@@ -84,11 +84,27 @@ export default class Helper {
     return url
   }
 
-  // XXX file can be a Node Buffer, or a file loaded in the browser.
-  uploadFile (file, url) {
-    const data = new FormData()
-    data.append('file', file, 'file')
-    return fetchService.uploadFile(data, url)
+  // dataOrStream can be a Node Buffer, stream, or a string or Blob (or Blob subclasses such as File) in the browser.
+  uploadFile (dataOrStream, url) {
+    return this.getDataFrom(dataOrStream).then(data => {
+      const formData = new FormData()
+      formData.append('file', data, 'file')
+      return fetchService.uploadFile(formData, url)
+    })
+  }
+
+  getDataFrom (dataOrStream) {
+    return new Promise((resolve, reject) => {
+        if (dataOrStream instanceof Buffer || typeof dataOrStream === 'string') {
+          resolve(dataOrStream)
+        } else {
+          let data = Buffer.from([])
+          dataOrStream.on('data', chunk => data = Buffer.concat([data, chunk]))
+          dataOrStream.on('end', () => resolve(Buffer.from(data)))
+          dataOrStream.on('error', err => reject(err))
+        }
+      }
+    )
   }
 }
 
