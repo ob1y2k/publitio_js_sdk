@@ -1,6 +1,6 @@
 {
   "name": "publitio_js_sdk",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple JavaScript SDK for Publitio API",
   "main": "build/publitio-api.js",
   "scripts": {
@@ -30,7 +30,7 @@
     "eslint-plugin-node": "^9.1.0",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
-    "watch": "^1.0.2",
+    "watch": "^1.0.3",
     "webpack": "^4.39.1",
     "webpack-cli": "^3.3.6"
   },

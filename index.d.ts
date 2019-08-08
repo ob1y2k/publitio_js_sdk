@@ -2,6 +2,9 @@ export function publitioApi(key: string, secret: string): PublitioAPI
 
 type createActions = 'file'|'watermark'
 
+/**
+ * Primary class for communicating with the Publitio API.
+ */
 export default interface PublitioAPI {
   /**
    * @param key The public API key, found in the Publitio dashboard.
