@@ -1,14 +1,12 @@
 import SHA1 from 'crypto-js/sha1'
-import { ACTIONS, MIN, MAX } from './constants'
+import { MIN, MAX } from './constants'
 import { fetchService } from './fetch'
 
 const uint32Max = Math.pow(2, 32)
 
 export const runningInNode = (typeof window === 'undefined')
 
-if (runningInNode) {
-  var FormData = require('form-data')
-}
+const FormData = (runningInNode) ? require('form-data') : window.FormData
 
 export default class Helper {
   serialize (obj) {
@@ -76,9 +74,9 @@ export default class Helper {
   }
 
   getUrlForFileCreation (action, args, url, key, secret, version) {
-    if (action === ACTIONS.FILE) {
+    if (action === 'file') {
       url = this.createUrl('/files/create', args, url, key, secret, version)
-    } else if (action === ACTIONS.WATERMARK) {
+    } else if (action === 'watermark') {
       url = this.createUrl('/watermarks/create', args, url, key, secret, version)
     }
     return url
@@ -95,16 +93,15 @@ export default class Helper {
 
   getDataFrom (dataOrStream) {
     return new Promise((resolve, reject) => {
-        if (dataOrStream instanceof Buffer || typeof dataOrStream === 'string') {
-          resolve(dataOrStream)
-        } else {
-          let data = Buffer.from([])
-          dataOrStream.on('data', chunk => data = Buffer.concat([data, chunk]))
-          dataOrStream.on('end', () => resolve(Buffer.from(data)))
-          dataOrStream.on('error', err => reject(err))
-        }
+      if (!runningInNode || dataOrStream instanceof Buffer || typeof dataOrStream === 'string') {
+        resolve(dataOrStream)
+      } else {
+        let data = Buffer.from([])
+        dataOrStream.on('data', chunk => { data = Buffer.concat([data, chunk]) })
+        dataOrStream.on('end', () => resolve(Buffer.from(data)))
+        dataOrStream.on('error', err => reject(err))
       }
-    )
+    })
   }
 }
 

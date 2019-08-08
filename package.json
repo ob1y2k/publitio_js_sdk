@@ -4,11 +4,11 @@
   "description": "Simple JavaScript SDK for Publitio API",
   "main": "build/publitio-api.js",
   "scripts": {
-    "build": "babel src -d build && webpack",
-    "prepublish": "npm run build",
+    "build": "babel --source-maps=true src -d build && webpack",
+    "prepublishOnly": "npm run build",
     "release": "np",
     "watch": "watch 'npm run build' src",
-    "lint": "eslint src --fix",
+    "lint": "eslint src examples --fix",
     "demo-server": "node demo/simple-server.js"
   },
   "keywords": [

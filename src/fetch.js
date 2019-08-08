@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { KNOWN_ERROR_CODES } from './constants'
-import { runningInNode } from './helper';
+import { runningInNode } from './helper'
 
 class FetchService {
   checkResponseStatus (response) {
@@ -30,10 +30,10 @@ class FetchService {
     if (runningInNode) {
       req = axios.post(url, formData.getBuffer(), {
         validateStatus,
-        headers: formData.getHeaders(),
+        headers: formData.getHeaders()
       })
     } else {
-      req = axios.post(url, formData, {validateStatus})
+      req = axios.post(url, formData, { validateStatus })
     }
 
     return req
