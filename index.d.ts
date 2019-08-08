@@ -5,12 +5,12 @@ type createActions = 'file'|'watermark'
 /**
  * Primary class for communicating with the Publitio API.
  */
-export default interface PublitioAPI {
+export default class PublitioAPI {
   /**
    * @param key The public API key, found in the Publitio dashboard.
    * @param secret The secret API key, found in the Publitio dashboard.
    */
-  new(key: string, secret: string)
+  constructor(key: string, secret: string)
 
   /**
    * @returns API version.
@@ -28,7 +28,7 @@ export default interface PublitioAPI {
    * @param options Call-specific options. These get encoded into the URL as query parameters.
    * @returns A promise that resolves to parsed response JSON.
    */
-  call(path: string, method: string|undefined, options: Object): Promise<any>
+  call(path: string, method?: string, options?: Object): Promise<any>
 
   /**
    * Makes an API call, uploading the given file to the server.
@@ -42,7 +42,7 @@ export default interface PublitioAPI {
    * @param options Call-specific options. These get encoded into the URL as query parameters.
    * @returns A promise that resolves to parsed response JSON.
    */
-  uploadFile(file: Buffer|ReadableStream|string|Blob, kind:'file'|'watermark', options: Object): Promise<any>
+  uploadFile(file: Buffer|ReadableStream|string|Blob, kind:'file'|'watermark', options?: Object): Promise<any>
 
   /**
    * Uploads a file to the server from a remote address.
@@ -51,7 +51,7 @@ export default interface PublitioAPI {
    * @param options Call-specific options. These get encoded into the URL as query parameters.
    * @returns A promise that resolves to parsed response JSON.
    */
-  uploadRemoteFile(kind: 'file'|'watermark', options: any): Promise<any>
+  uploadRemoteFile(kind: 'file'|'watermark', options?: any): Promise<any>
 }
 
 /**

@@ -62,7 +62,7 @@ publitio.call('/files/list', 'GET', { offset: '0', limit: '10'})
         .catch(error => { console.log(error) })
 ```
 
-See the [examples directory](./examples) for useful examples
+See the [examples directory](https://github.com/ob1y2k/publitio_js_sdk/tree/master/examples) for useful examples
 and check the [official Publitio docs](https://publit.io/docs/).
 
 For legacy reasons, the following is also allowed:
