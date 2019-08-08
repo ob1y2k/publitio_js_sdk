@@ -37,7 +37,7 @@ export default interface PublitioAPI {
    * creating a new file or watermark. If you don't need to upload a file to the server,
    * use `call`.
    * 
-   * @param file The file to upload. Can be either Buffer or Readablestream for Node, Blob (including subclasses like file) in the browser, or string.
+   * @param file The file to upload. Can be either Buffer or ReadableStream for Node, Blob (including subclasses like file) in the browser, or string.
    * @param kind The kind of file being uploaded, can be either 'file' or 'watermark'.
    * @param options Call-specific options. These get encoded into the URL as query parameters.
    * @returns A promise that resolves to parsed response JSON.

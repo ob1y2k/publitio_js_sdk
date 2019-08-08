@@ -1,7 +1,7 @@
 import PublitioAPI from 'publitio_js_sdk'
 
-const publitio = new PublitioAPI('API key', 'API secret')
+const publitio = new PublitioAPI('<API key>', '<API secret>')
 
-publitio.call('/files/versions/delete/version ID', 'DELETE')
+publitio.call('/files/versions/delete/<version ID>', 'DELETE')
   .then(data => { console.log(data) })
   .catch(error => { console.log(error) })
