@@ -8,17 +8,13 @@ JavaScript SDK for the [Publitio API](https://publit.io).
 ### Using npm:
 
 ```shell
-
-$ npm install publitio_js_sdk --save
-
+$ npm install publitio_js_sdk
 ```
 
 ### Using yarn:
 
 ```shell
-
 $ yarn add publitio_js_sdk
-
 ```
 
 ## Usage
@@ -35,7 +31,7 @@ using webpack or a similar tool, you should always load
 
 ```javascript
 const PublitioAPI = require('publitio_js_sdk').default
-const publitio = new PublitioAPI('API key', 'API secret')
+const publitio = new PublitioAPI('<API key>', '<API secret>')
 ```
 
 ### Using RequireJS in the browser:
@@ -55,7 +51,7 @@ requirejs(
 
 ```javascript
 import PublitioAPI from 'publitio_js_sdk'
-const publitio = new PublitioAPI('API key', 'API secret')
+const publitio = new PublitioAPI('<API key>', '<API secret>')
 ```
 
 Sample API call to list files: 
@@ -66,14 +62,14 @@ publitio.call('/files/list', 'GET', { offset: '0', limit: '10'})
         .catch(error => { console.log(error) })
 ```
 
-See the [examples directory](./examples) for useful examples
+See the [examples directory](https://github.com/ob1y2k/publitio_js_sdk/tree/master/examples) for useful examples
 and check the [official Publitio docs](https://publit.io/docs/).
 
 For legacy reasons, the following is also allowed:
 
 ```javascript
 import { publitioApi } from 'publitio_js_sdk'
-const publitio = publitioApi('API key', 'API secret')
+const publitio = publitioApi('<API key>', '<API secret>')
 ```
 
 The `publitioApi` function is deprecated and should be avoided.

@@ -1,13 +1,12 @@
 import PublitioAPI from 'publitio_js_sdk'
 
-const publitio = new PublitioAPI('API key', 'API secret')
+const publitio = new PublitioAPI('<API key>', '<API secret>')
 
-publitio.call('/files/update/0M08pwHk', 'PUT', {
-  title: 'xxxx',
-  description: 'wwww',
-  tags: 'tag1 tag2',
-  privacy: '1',
-  option_download: '1',
-  option_ad: '1'
-}).then((data) => { console.log(data) })
-  .catch((error) => { console.log(error) })
+publitio.call('/files/update/<file ID>', 'PUT', {
+  title: '<file title>',
+  description: '<file description>',
+  tags: '<file tags separated by spaces or commas>',
+  privacy: '<0 - private, 1 - public>',
+  option_download: '<0 - disable downloads, 1 - enable downloads>'
+}).then(data => { console.log(data) })
+  .catch(error => { console.log(error) })
