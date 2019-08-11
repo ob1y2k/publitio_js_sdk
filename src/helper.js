@@ -6,7 +6,7 @@ const uint32Max = Math.pow(2, 32)
 
 export const runningInNode = (typeof window === 'undefined')
 
-const FormData = (runningInNode) ? require('form-data') : window.FormData
+const FormData = (runningInNode) ? require(/* webpackExclude: /form-data$/ */ 'form-data') : window.FormData
 
 export default class Helper {
   serialize (obj) {
@@ -21,18 +21,22 @@ export default class Helper {
 
   mtRand (min, max) {
     const hasCrypto = (typeof crypto !== 'undefined')
-    let r
 
-    if (runningInNode) {
-      const crypto = require('crypto')
-      r = crypto.randomBytes(8).readUInt32BE() / uint32Max
-    } else if (hasCrypto) {
-      r = crypto.getRandomValues(new Uint32Array(1))[0] / uint32Max
-    } else {
-      r = Math.random()
+    function r() {
+      return new Promise((resolve, reject) => {
+        if (runningInNode) {
+          import(/* webpackExclude: /crypto$/ */ 'crypto').then(
+            crypto => resolve(crypto.randomBytes(8).readUInt32BE() / uint32Max)
+          )
+        } else if (hasCrypto) {
+          resolve(crypto.getRandomValues(new Uint32Array(1))[0] / uint32Max)
+        } else {
+          resolve(Math.random())
+        }
+      })
     }
 
-    return Math.floor(r * (max - min + 1)) + min
+    return r().then(x => Math.floor(x * (max - min + 1)) + min)
   }
 
   pad (number, str) {

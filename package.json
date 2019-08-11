@@ -1,12 +1,11 @@
 {
   "name": "publitio_js_sdk",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Simple JavaScript SDK for Publitio API",
   "main": "build/publitio-api.js",
   "scripts": {
-    "build": "babel --source-maps=true src -d build && webpack",
+    "build": "babel --source-maps=true src -d build && webpack && cpy index.d.ts build --rename=publitio-api.min.d.ts",
     "prepublishOnly": "npm run build",
-    "release": "np",
     "watch": "watch 'npm run build' src",
     "lint": "eslint src examples --fix",
     "demo-server": "node demo/simple-server.js"
@@ -24,6 +23,7 @@
     "@babel/core": "^7.5.5",
     "@babel/preset-env": "^7.5.5",
     "babel-loader": "^8.0.6",
+    "cpy-cli": "^2.0.0",
     "eslint": "^6.1.0",
     "eslint-config-standard": "^13.0.1",
     "eslint-plugin-import": "^2.18.2",

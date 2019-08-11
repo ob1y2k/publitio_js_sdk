@@ -16,7 +16,8 @@ class FetchService {
   callApi (url, method) {
     return axios({
       method,
-      url
+      url,
+      validateStatus: () => true,
     })
       .then(res => this.checkResponseStatus(res))
       .then(res => res.data)
@@ -25,15 +26,14 @@ class FetchService {
   uploadFile (formData, url) {
     let req
 
-    const validateStatus = () => true
-
     if (runningInNode) {
       req = axios.post(url, formData.getBuffer(), {
         validateStatus,
-        headers: formData.getHeaders()
+        headers: formData.getHeaders(),
+        validateStatus: () => true,
       })
     } else {
-      req = axios.post(url, formData, { validateStatus })
+      req = axios.post(url, formData, { validateStatus: () => true, })
     }
 
     return req
