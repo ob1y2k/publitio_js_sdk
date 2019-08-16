@@ -23,8 +23,7 @@ This library runs both in Node and in the browser.
 When using the library in the browser, note that it is
 in [UMD](https://github.com/umdjs/umd) format.
 This means you can load it either as a simple
-`<script>` tag, or using RequireJS. Unless you are
-using webpack or a similar tool, you should always load
+`<script>` tag, or using RequireJS. You should always load
 `publitio-api.min.js` in the browser.
 
 ### Using require in Node:
