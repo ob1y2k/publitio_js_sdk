@@ -20,6 +20,7 @@ export default class PublitioAPI {
    * If a file needs to be uploaded to the server, use `uploadFile`.
    * 
    * @param path The call path. For example, '/files/list' to list all files.
+   *             The leading slash is optional, e.g. 'files/list' is also a valid path.
    * @param method The HTTP method to use.
    * @param options Call-specific options. These get encoded into the URL as query parameters.
    * @returns A promise that resolves to parsed response JSON.

@@ -9,6 +9,14 @@ export const runningInNode = (typeof window === 'undefined')
 
 const FormData = (runningInNode) ? require('form-data') : window.FormData
 
+function removeLeadingSlashes(url) {
+  let i = 0;
+  while (i < url.length && url[i] === '/') {
+    ++i
+  }
+  return url.slice(i)
+}
+
 export default class Helper {
   serialize (obj) {
     const str = []
@@ -56,6 +64,7 @@ export default class Helper {
   }
 
   createUrl (call, args = [], url, key, secret, version) {
+    call = removeLeadingSlashes(call)
     args = this.appendArguments(args, key, secret, version)
     return `${url}${call}?${this.serialize(args)}`
   }
