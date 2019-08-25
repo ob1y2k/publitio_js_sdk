@@ -5,16 +5,16 @@ JavaScript SDK for the [Publitio API](https://publit.io).
 
 ## Installation
 
-### Using npm:
+### Using npm
 
 ```shell
-$ npm install publitio_js_sdk
+npm install publitio_js_sdk
 ```
 
-### Using yarn:
+### Using yarn
 
 ```shell
-$ yarn add publitio_js_sdk
+yarn add publitio_js_sdk
 ```
 
 ## Usage
@@ -26,7 +26,7 @@ This means you can load it either as a simple
 `<script>` tag, or using RequireJS. You should always load
 `publitio-api.min.js` in the browser.
 
-### Using `require` in Node:
+### Using `require` in Node
 
 ```javascript
 const PublitioAPI = require('publitio_js_sdk').default
