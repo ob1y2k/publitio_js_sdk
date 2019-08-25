@@ -33,7 +33,8 @@ const PublitioAPI = require('publitio_js_sdk').default
 const publitio = new PublitioAPI('<API key>', '<API secret>')
 ```
 
-### Using RequireJS in the browser:
+### Using RequireJS in the browser
+
 ```javascript
 requirejs(
   ['node_modules/publitio_js_sdk/build/publitio-api.min.js'],
@@ -41,19 +42,20 @@ requirejs(
 )
 ```
 
-### Using `<script>` tags:
+### Using `<script>` tags
+
 ```html
 <script src="node_modules/publitio_js_sdk/build/publitio-api.min.js"></script>
 ```
 
-### Using ES6 modules in Node:
+### Using ES6 modules in Node
 
 ```javascript
 import PublitioAPI from 'publitio_js_sdk'
 const publitio = new PublitioAPI('<API key>', '<API secret>')
 ```
 
-### Using ES6 modules in the browser (for example, with Webpack or Browserify):
+### Using ES6 modules in the browser (for example, with Webpack or Browserify)
 
 ```javascript
 import PublitioAPI from './node_modules/publitio_js_sdk/build/publitio-api.min.js'
@@ -64,9 +66,13 @@ The reason why you should import `publitio-api.min.js` in the
 browser is so that Webpack or Browserify wouldn't include
 Node-specific modules in your build, making your bundle needlessly large.
 
+## Documentation
+
+You can find full documentation [here](https://ob1y2k.github.io/publitio_js_sdk/).
+
 ## Examples
 
-Sample API call to list files: 
+Sample API call to list files:
 
 ```javascript
 publitio.call('/files/list', 'GET', { offset: '0', limit: '10'})
