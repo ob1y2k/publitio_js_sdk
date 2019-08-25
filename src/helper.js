@@ -1,12 +1,13 @@
 import SHA1 from 'crypto-js/sha1'
-import { MIN, MAX, VERSION } from './constants'
+import { MIN, MAX, API } from './constants'
 import { fetchService } from './fetch'
+import BadResponseJSON from './BadResponseJSON'
 
 const uint32Max = Math.pow(2, 32)
 
 export const runningInNode = (typeof window === 'undefined')
 
-const FormData = (runningInNode) ? require(/* webpackExclude: /form-data$/ */ 'form-data') : window.FormData
+const FormData = (runningInNode) ? require('form-data') : window.FormData
 
 export default class Helper {
   serialize (obj) {
@@ -25,7 +26,7 @@ export default class Helper {
     function r() {
       return new Promise((resolve, reject) => {
         if (runningInNode) {
-          import(/* webpackExclude: /crypto$/ */ 'crypto').then(
+          import('crypto').then(
             crypto => resolve(crypto.randomBytes(8).readUInt32BE() / uint32Max)
           )
         } else if (hasCrypto) {
@@ -61,7 +62,13 @@ export default class Helper {
 
   callApi (url, method) {
     return fetchService.callApi(url, method)
-      .catch((error) => { throw error })
+      .then(res => {
+        if (typeof res !== 'object') {
+          throw new BadResponseJSON(res, url)
+        }
+
+        return res
+      })
   }
 
   appendArguments (args, key, secret) {
@@ -69,7 +76,7 @@ export default class Helper {
     args['api_timestamp'] = this.timestamp()
     args['api_key'] = key
     args['api_signature'] = this.sign(args, secret)
-    args['api_kit'] = `js-${VERSION}`
+    args['api_kit'] = `js-${API.VERSION}`
 
     return args
   }

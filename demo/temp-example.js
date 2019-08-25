@@ -1,6 +1,7 @@
-const { publitioApi } = require('../build/publitio-api')
+const { default: PublitioAPI, BadResponseJSON } = require('../build/publitio-api')
 
-const publitio = publitioApi('ktuZkDrpfA3M7t3txAp0', 'RWnZpAdRa8olrNaDjsZp1Q5VbWgznwy8')
-publitio.call('/files/list')
-  .then(r => console.log(r))
-  .catch(e => console.log(e))
+console.log(BadResponseJSON)
+const publitio = new PublitioAPI('oP82yaAMmMPfJAJ77743', 'cWBqbGafr6jaTMlnNyjpJvBmj9gNeiTA')
+publitio.call('/files/xx', 'GET', {limit: 1})
+  .then(r => console.log('OK', typeof r, r))
+  .catch(e => console.log('Reject', e instanceof BadResponseJSON, e))

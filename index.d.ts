@@ -52,6 +52,14 @@ export default class PublitioAPI {
 }
 
 /**
+ * This exception will be thrown when the server responds with invalid JSON.
+ * This might be either because the request URL was invalid, or an internal
+ * server error happened.
+ */
+export class BadResponseJSON extends Error {
+}
+
+/**
  * This function was used with old versions of the SDK and is now deprecated.
  * Use `new PublitioAPI(key, secret)` instead.
  * 
