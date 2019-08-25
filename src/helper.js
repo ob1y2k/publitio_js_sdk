@@ -1,5 +1,5 @@
 import SHA1 from 'crypto-js/sha1'
-import { MIN, MAX } from './constants'
+import { MIN, MAX, VERSION } from './constants'
 import { fetchService } from './fetch'
 
 const uint32Max = Math.pow(2, 32)
@@ -65,10 +65,11 @@ export default class Helper {
   }
 
   appendArguments (args, key, secret) {
-    args.api_nonce = this.apiNonce()
-    args.api_timestamp = this.timestamp()
-    args.api_key = key
-    args.api_signature = this.sign(args, secret)
+    args['api_nonce'] = this.apiNonce()
+    args['api_timestamp'] = this.timestamp()
+    args['api_key'] = key
+    args['api_signature'] = this.sign(args, secret)
+    args['api_kit'] = `js-${VERSION}`
 
     return args
   }

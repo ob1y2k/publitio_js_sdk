@@ -1,5 +1,5 @@
 export const API = {
-  VERSION: '1.0',
+  VERSION: '1.0.11',
   URL: 'https://api.publit.io/v1'
 }
 

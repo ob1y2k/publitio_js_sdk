@@ -1,7 +1,7 @@
 
 # Publitio JS SDK
 
-JavaScript SDK for the [Publitio API](https://publit.io).
+JavaScript SDK for [Publitio](https://publit.io).
 
 ## Installation
 
