@@ -1,7 +1,3 @@
-export function publitioApi(key: string, secret: string): PublitioAPI
-
-type createActions = 'file'|'watermark'
-
 /**
  * Primary class for communicating with the Publitio API.
  */
@@ -37,8 +33,9 @@ export default class PublitioAPI {
    * creating a new file or watermark. If you don't need to upload a file to the server,
    * use `call`.
    * 
-   * @param file The file to upload. Can be either Buffer or ReadableStream for Node, Blob (including subclasses like file) in the browser, or string.
-   * @param kind The kind of file being uploaded, can be either 'file' or 'watermark'.
+   * @param file The file to upload. Can be either `Buffer` or `ReadableStream` for Node,
+   *             `Blob` (including subclasses like `File`) in the browser, or a string.
+   * @param kind The kind of file being uploaded, can be either a file or a watermark.
    * @param options Call-specific options. These get encoded into the URL as query parameters.
    * @returns A promise that resolves to parsed response JSON.
    */
@@ -47,7 +44,7 @@ export default class PublitioAPI {
   /**
    * Uploads a file to the server from a remote address.
    * 
-   * @param kind The kind of file being uploaded, can be either 'file' or 'watermark'.
+   * @param kind The kind of file being uploaded, can be either a file or a watermark.
    * @param options Call-specific options. These get encoded into the URL as query parameters.
    * @returns A promise that resolves to parsed response JSON.
    */
@@ -55,6 +52,9 @@ export default class PublitioAPI {
 }
 
 /**
+ * This function was used with old versions of the SDK and is now deprecated.
+ * Use `new PublitioAPI(key, secret)` instead.
+ * 
  * @deprecated
  * @param key The public API key, found in the Publitio dashboard.
  * @param secret The secret API key, found in the Publitio dashboard.
