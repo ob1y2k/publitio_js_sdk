@@ -47,11 +47,10 @@ export default class PublitioAPI {
   /**
    * Uploads a file to the server from a remote address.
    * 
-   * @param kind The kind of file being uploaded, can be either 'file' or 'watermark'.
    * @param options Call-specific options. These get encoded into the URL as query parameters.
    * @returns A promise that resolves to parsed response JSON.
    */
-  uploadRemoteFile(kind: 'file'|'watermark', options?: any): Promise<any>
+  uploadRemoteFile(options?: any): Promise<any>
 }
 
 /**

@@ -1,26 +1,26 @@
 import axios from 'axios'
-import { KNOWN_ERROR_CODES } from './constants'
 import { runningInNode } from './helper'
 
-class FetchService {
-  checkResponseStatus (response) {
-    if ((response.status >= 200 && response.status < 300) || KNOWN_ERROR_CODES.includes(response.status)) {
-      return response
-    }
-
-    const error = new Error(response.statusText)
-    error.response = response
-    throw error
+class InvalidJSONError extends Error {
+  constructor(responseData) {
+    super("The server was expected to respond with JSON, but didn't. This might be because you used " +
+          "an invalid endpoint URL, an invalid HTTP method, or due to an internal server error. Response:\n" +
+          responseData)
   }
+}
 
+class FetchService {
   callApi (url, method) {
     return axios({
       method,
       url,
       validateStatus: () => true,
     })
-      .then(res => this.checkResponseStatus(res))
-      .then(res => res.data)
+    .then(res => {
+      if (typeof res.data === 'string')
+        throw new InvalidJSONError(res.data)
+      return res.data
+    })
   }
 
   uploadFile (formData, url) {
@@ -35,9 +35,11 @@ class FetchService {
       req = axios.post(url, formData, { validateStatus: () => true, })
     }
 
-    return req
-      .then(res => this.checkResponseStatus(res))
-      .then(res => res.data)
+    return req.then(res => {
+      if (typeof res.data === 'string')
+        throw new InvalidJSONError(res.data)
+      return res.data
+    })
   }
 }
 

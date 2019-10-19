@@ -20,23 +20,8 @@ export default class Helper {
   }
 
   mtRand (min, max) {
-    const hasCrypto = (typeof crypto !== 'undefined')
-
-    function r() {
-      return new Promise((resolve, reject) => {
-        if (runningInNode) {
-          import(/* webpackExclude: /crypto$/ */ 'crypto').then(
-            crypto => resolve(crypto.randomBytes(8).readUInt32BE() / uint32Max)
-          )
-        } else if (hasCrypto) {
-          resolve(crypto.getRandomValues(new Uint32Array(1))[0] / uint32Max)
-        } else {
-          resolve(Math.random())
-        }
-      })
-    }
-
-    return r().then(x => Math.floor(x * (max - min + 1)) + min)
+    const x = Math.random()
+    return Math.floor(x * (max - min + 1)) + min
   }
 
   pad (number, str) {
@@ -56,6 +41,8 @@ export default class Helper {
 
   createUrl (call, args = [], url, key, secret, version) {
     args = this.appendArguments(args, key, secret, version)
+    if (call[0] !== '/')
+      call = '/' + call
     return `${url}${call}?${this.serialize(args)}`
   }
 
@@ -64,11 +51,12 @@ export default class Helper {
       .catch((error) => { throw error })
   }
 
-  appendArguments (args, key, secret) {
+  appendArguments (args, key, secret, version) {
     args.api_nonce = this.apiNonce()
     args.api_timestamp = this.timestamp()
     args.api_key = key
     args.api_signature = this.sign(args, secret)
+    args.api_kit = `JS${version}`
 
     return args
   }
