@@ -28,7 +28,6 @@ class FetchService {
 
     if (runningInNode) {
       req = axios.post(url, formData.getBuffer(), {
-        validateStatus,
         headers: formData.getHeaders(),
         validateStatus: () => true,
       })
