@@ -1,6 +1,8 @@
 const { publitioApi } = require('../build/publitio-api')
+const fs = require('fs')
 
-const publitio = publitioApi('ktuZkDrpfA3M7t3txAp0', 'RWnZpAdRa8olrNaDjsZp1Q5VbWgznwy8')
-publitio.call('/files/list')
+const file = fs.readFileSync('/home/mogwai/music.bak/Music/car seat headrest - nervous young man (2013)/01 boxing day.mp3')
+const publitio = publitioApi('NsSyzZGG4NDkGbbkc44g', '6BWw4SalTm6qDnl6mH7gv54RtT9hpVuT')
+publitio.uploadFile(file, 'file', { title: 'nervous' })
   .then(r => console.log(r))
   .catch(e => console.log(e))

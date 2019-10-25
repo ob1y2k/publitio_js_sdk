@@ -29,10 +29,14 @@ class FetchService {
     if (runningInNode) {
       req = axios.post(url, formData.getBuffer(), {
         headers: formData.getHeaders(),
+        maxContentLength: Infinity,
         validateStatus: () => true,
       })
     } else {
-      req = axios.post(url, formData, { validateStatus: () => true, })
+      req = axios.post(url, formData, {
+        maxContentLength: Infinity,
+        validateStatus: () => true,
+      })
     }
 
     return req.then(res => {
