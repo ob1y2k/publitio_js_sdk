@@ -39,6 +39,11 @@ export default class PublitioAPI {
     const url = helper.getUrlForFileCreation('file', args, this.url, this.key, this.secret, this.version)
     return helper.callApi(url, 'POST')
   }
+
+  uploadUrlSigned (args = {}) { 
+    const url = helper.getUrlForFileCreation('file', args, this.url, this.key, this.secret, this.version)
+    return url
+  }
 }
 
 export function publitioApi (key, secret) {

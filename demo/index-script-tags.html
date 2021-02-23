@@ -1,12 +1,12 @@
 <html>
   <head>
     <title>Using script tags</title>
-    <script src="publitio-api.min.js"></script>
+    <script src="../build/publitio-api.min.js"></script>
   </head>
   <body>
     <script>
       function call() {
-        const publitio = new PublitioAPI('ktuZkDrpfA3M7t3txAp0', 'RWnZpAdRa8olrNaDjsZp1Q5VbWgznwy8')
+        const publitio = new PublitioAPI('yourApiKey', 'yourApiSecret')
         const file = document.getElementById('file-input').files[0]
         publitio.uploadFile(file)
           .then((data) => { console.log(data) })
