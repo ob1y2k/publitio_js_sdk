@@ -30,11 +30,17 @@ class FetchService {
       req = axios.post(url, formData.getBuffer(), {
         headers: formData.getHeaders(),
         maxContentLength: Infinity,
+        maxBodyLength: Infinity,
         validateStatus: () => true,
       })
     } else {
       req = axios.post(url, formData, {
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
         maxContentLength: Infinity,
+        maxBodyLength: Infinity,
+        maxDataSize: Infinity,
         validateStatus: () => true,
       })
     }

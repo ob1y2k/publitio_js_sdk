@@ -78,7 +78,10 @@ export default class Helper {
   uploadFile (dataOrStream, url) {
     return this.getDataFrom(dataOrStream).then(data => {
       const formData = new FormData()
-      formData.append('file', data, 'file')
+      formData.append('file', data) //, 'file'
+      formData.maxDataSize = Infinity
+      formData.maxBodyLength = Infinity
+      formData.maxContentLength = Infinity
       return fetchService.uploadFile(formData, url)
     })
   }

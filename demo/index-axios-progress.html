@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <title>Using axios with progress tags</title>
+    <script src="../build/publitio-api.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+  </head>
+  <body>
+    <script>
+      function call() {
+        
+        const publitio = new PublitioAPI('api key', 'secret key')
+        const file = document.getElementById('file-input').files[0]
+        const api_url = publitio.uploadUrlSigned();
+        
+        let formData = new FormData();
+        formData.append('file', file);
+
+        if(file==undefined) {
+          console.log("Choose file to upload first")
+          return
+        }
+
+        axios.post(api_url,
+            formData,
+            {
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'multipart/form-data'
+                },
+                onUploadProgress: function (progressEvent) {
+                    const valeur = Math.round((progressEvent.loaded / progressEvent.total) * 100);
+                    console.log(valeur+"%");          
+
+                }.bind(this)
+            }
+        ).then(function (response) {
+            console.log(response.data);
+            if (response.data.success == true) {
+                console.log('upload ok');
+            } else {
+                console.log("upload failed");
+            }
+
+        });
+       
+      }
+    </script>
+    <input type="file" id="file-input">
+    <button onclick='call()'>Upload</button>
+  </body>
+</html>
