@@ -1,6 +1,7 @@
 import SHA1 from 'crypto-js/sha1'
 import { MIN, MAX } from './constants'
 import { fetchService } from './fetch'
+//import { runningInNode } from './helper'
 
 const uint32Max = Math.pow(2, 32)
 
@@ -78,7 +79,10 @@ export default class Helper {
   uploadFile (dataOrStream, url) {
     return this.getDataFrom(dataOrStream).then(data => {
       const formData = new FormData()
-      formData.append('file', data) //, 'file'
+      if (runningInNode)
+        formData.append('file', data, 'file') //node requrirement
+      else
+        formData.append('file', data) // >1gb size issue, file as name param must be off
       formData.maxDataSize = Infinity
       formData.maxBodyLength = Infinity
       formData.maxContentLength = Infinity

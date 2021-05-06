@@ -4,7 +4,7 @@
   "description": "Simple JavaScript SDK for Publitio API",
   "main": "build/publitio-api.js",
   "scripts": {
-    "build": "(babel --source-maps=true src -d build) -and (webpack) -and (cpy index.d.ts build --rename=publitio-api.min.d.ts)",
+    "build": "(babel --source-maps=true src -d build) && (webpack) && (cpy index.d.ts build --rename=publitio-api.min.d.ts)",
     "prepublishOnly": "npm run build",
     "watch": "watch 'npm run build' src",
     "lint": "eslint src examples --fix",
